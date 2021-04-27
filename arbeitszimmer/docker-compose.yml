@@ -15,13 +15,39 @@ volumes:
       device: ../global
       o: bind
 
+  mosquitto-data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/pirate/data/mosquitto/data
+      o: bind
+
+  mosquitto-log:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/pirate/data/mosquitto/log
+      o: bind
+
 services:
+  mosquitto:
+    restart: always
+    image: eclipse-mosquitto:2.0.3
+    hostname: mosquitto
+    ports:
+      - 1883:1883
+      - 9001:9001
+    volumes:
+      - mosquitto-data:/mosquitto/data
+      - mosquitto-log:/mosquitto/log
+      - ./mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf:ro
+
   shutter-control:
     restart: unless-stopped
     build:
-      context: shutter-control
+      context: ../../shutter-control
       args:
-        - CACHE_DATE=2020-02-08
+        - CACHE_DATE=2021-04-22
     hostname: shutter-control
     ports:
       - 3000:3000
@@ -32,4 +58,20 @@ services:
       - /dev/mem:/dev/mem
     volumes:
       - config:/config:nocopy
-      - global:/global:nocopy
+      - globals:/globals:nocopy
+
+  smart-home:
+    restart: unless-stopped
+    build:
+      context: ../../smart-home
+      args:
+        - CACHE_DATE=2021-04-22
+    hostname: smart-home
+    ports:
+      - 3000:3000
+    privileged: true
+    volumes:
+      - config:/config:nocopy
+      - globals:/globals:nocopy
+
+
