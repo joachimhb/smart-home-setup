@@ -5,14 +5,7 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: ./config
-      o: bind
-
-  config:
-    driver: local
-    driver_opts:
-      type: none
-      device: ../global
+      device: /home/pirate/shared/smart-home-setup/arbeitszimmer/config/
       o: bind
 
   mosquitto-data:
@@ -47,10 +40,8 @@ services:
     build:
       context: ../../shutter-control
       args:
-        - CACHE_DATE=2021-04-22
+        - CACHE_DATE=2021-05-02
     hostname: shutter-control
-    ports:
-      - 3000:3000
     cap_add:
       - SYS_RAWIO
     privileged: true
@@ -58,20 +49,19 @@ services:
       - /dev/mem:/dev/mem
     volumes:
       - config:/config:nocopy
-      - globals:/globals:nocopy
 
   smart-home:
     restart: unless-stopped
     build:
       context: ../../smart-home
       args:
-        - CACHE_DATE=2021-04-22
+        - CACHE_DATE=2021-05-02
     hostname: smart-home
     ports:
       - 3000:3000
+      - 3001:3001
     privileged: true
     volumes:
       - config:/config:nocopy
-      - globals:/globals:nocopy
 
 

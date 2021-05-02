@@ -1,6 +1,7 @@
 'use strict';
 
-const config = require('../smart-home/config');
+const rooms = require('../smart-home/rooms');
+const globals = require('../../../globals');
 
 const shutters = [];
 
@@ -10,7 +11,7 @@ const thisRooms = [
   // 'Kinderzimmer'
 ];
 
-for(const room of config) {
+for(const room of rooms) {
   if(room.shutters && thisRooms.includes(room.label)) {
     for(const shutter of room.shutters) {
       shutters.push({
@@ -24,4 +25,7 @@ for(const room of config) {
   }
 }
 
-module.exports = {shutters};
+module.exports = {
+  shutters,
+  globals,
+};
