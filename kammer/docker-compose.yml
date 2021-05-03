@@ -15,31 +15,13 @@ volumes:
       o: bind
 
 services:
-  bath-control:
+  fan-control:
     restart: unless-stopped
     build:
-      context: ../../bath-control
-      args:
-        - CACHE_DATE=2021-04-22
-    hostname: bath-control
-    ports:
-      - 3000:3000
-    cap_add:
-      - SYS_RAWIO
-    privileged: true
-    devices:
-      - /dev/mem:/dev/mem
-    volumes:
-      - config:/config:nocopy
-      - globals:/globals:nocopy
-
-  shutter-control:
-    restart: unless-stopped
-    build:
-      context: ../../shutter-control
+      context: ../../fan-control
       args:
         - CACHE_DATE=2021-05-03
-    hostname: shutter-control
+    hostname: fan-control
     cap_add:
       - SYS_RAWIO
     privileged: true
