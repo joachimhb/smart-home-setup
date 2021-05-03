@@ -79,8 +79,8 @@ module.exports = [
       {
         id: 'lueftung',
         label: 'Lüftung',
-        powerGpio: 22,
-        speedGpio: 23,
+        powerGpio: 18,
+        speedGpio: 27,
         minHumidityThreshold: 70,
         maxHumidityThreshold: 85,
         minRunTime: 1,
@@ -89,6 +89,23 @@ module.exports = [
         triggerLights: [
           'main'
         ],
+      }
+    ],
+  },
+  {
+    id: 'wc',
+    label: 'WC',
+    fans: [
+      {
+        id: 'lueftung',
+        label: 'Lüftung',
+        powerGpio: 22,
+        speedGpio: 23,
+        minHumidityThreshold: 70,
+        maxHumidityThreshold: 85,
+        minRunTime: 1,
+        lightTimeout: 3,
+        trailingTime: 2,
       }
     ],
   },
