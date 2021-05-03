@@ -5,14 +5,13 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: ${PWD}/config
+      device: /home/pirate/shared/smart-home-setup/kammer/config/
       o: bind
-
   globals:
     driver: local
     driver_opts:
       type: none
-      device: ${PWD}/../globals
+      device: /home/pirate/shared/smart-home-setup/globals/
       o: bind
 
 services:
@@ -25,6 +24,22 @@ services:
     hostname: bath-control
     ports:
       - 3000:3000
+    cap_add:
+      - SYS_RAWIO
+    privileged: true
+    devices:
+      - /dev/mem:/dev/mem
+    volumes:
+      - config:/config:nocopy
+      - globals:/globals:nocopy
+
+  shutter-control:
+    restart: unless-stopped
+    build:
+      context: ../../shutter-control
+      args:
+        - CACHE_DATE=2021-05-03
+    hostname: shutter-control
     cap_add:
       - SYS_RAWIO
     privileged: true

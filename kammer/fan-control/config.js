@@ -3,7 +3,6 @@
 const globals = require('../../../globals/');
 
 module.exports = {
+  controlledRoomIds: ['bad'],
   ...globals,
-  serverPort: 3000,
-  webSocketPort: 3001,
 };

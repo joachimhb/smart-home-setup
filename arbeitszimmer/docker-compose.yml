@@ -7,6 +7,12 @@ volumes:
       type: none
       device: /home/pirate/shared/smart-home-setup/arbeitszimmer/config/
       o: bind
+  globals:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/pirate/shared/smart-home-setup/globals/
+      o: bind
 
   mosquitto-data:
     driver: local
@@ -49,6 +55,7 @@ services:
       - /dev/mem:/dev/mem
     volumes:
       - config:/config:nocopy
+      - globals:/globals:nocopy
 
   smart-home:
     restart: unless-stopped
@@ -63,5 +70,6 @@ services:
     privileged: true
     volumes:
       - config:/config:nocopy
+      - globals:/globals:nocopy
 
 
