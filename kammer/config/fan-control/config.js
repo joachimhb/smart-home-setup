@@ -3,6 +3,6 @@
 const globals = require('../../../globals/');
 
 module.exports = {
-  controlledRoomIds: ['bad'],
+  controlledRoomIds: ['bad', 'wc'],
   ...globals,
 };
