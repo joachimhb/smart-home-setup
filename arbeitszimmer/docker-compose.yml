@@ -67,7 +67,11 @@ services:
     ports:
       - 3000:3000
       - 3001:3001
+    cap_add:
+      - SYS_RAWIO
     privileged: true
+    devices:
+      - /dev/mem:/dev/mem
     volumes:
       - config:/config:nocopy
       - globals:/globals:nocopy

@@ -1,7 +1,7 @@
 'use strict';
 
 const shutterConfig = {
-  fullCloseMs: 7000,
+  fullCloseMs: 19000,
 };
 
 module.exports = [
@@ -95,6 +95,13 @@ module.exports = [
   {
     id: 'wc',
     label: 'WC',
+    lights: [
+      {
+        id: 'main',
+        label: 'Licht',
+        gpio: 21,
+      },
+    ],
     fans: [
       {
         id: 'lueftung',
@@ -103,9 +110,12 @@ module.exports = [
         speedGpio: 23,
         minHumidityThreshold: 70,
         maxHumidityThreshold: 85,
-        minRunTime: 1,
-        lightTimeout: 3,
-        trailingTime: 2,
+        minRunTime: 60,
+        lightTimeout: 120,
+        trailingTime: 120,
+        triggerLights: [
+          'main'
+        ],
       }
     ],
   },

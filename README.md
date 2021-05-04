@@ -17,6 +17,13 @@ sudo apt-get install -y g++
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.38.0/install.sh | bash
 ```
 
+### swap
+sudo fallocate -l 4G /swapfile
+sudo chmod 600 /swapfile
+sudo mkswap /swapfile
+sudo swapon /swapfile
+echo "/swapfile none swap sw 0 0" | sudo tee -a /etc/fstab
+
 ### pigpio
 
 ```sh
