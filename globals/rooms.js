@@ -11,7 +11,7 @@ module.exports = [
     shutters: [
       {
         id: 'main',
-        label: '',
+        label: 'Rolladen',
         powerGpio: 6,
         directionGpio: 12,
         ...shutterConfig,
@@ -21,44 +21,61 @@ module.exports = [
       {
         id: 'main',
         label: 'Fenster',
+        affectsShutter: 'main',
+        // gpio: 21,
       }
     ]
   },
-  {
-    id: 'arbeitszimmer',
-    label: 'Arbeitszimmer',
-    shutters: [
-      {
-        id: 'main',
-        label: '',
-        powerGpio: 19,
-        directionGpio: 16,
-        ...shutterConfig,
-      }
-    ],
-    windows: [
-      {
-        id: 'main',
-        label: 'Fenster'
-      }
-    ]
-  },
+  // {
+  //   id: 'arbeitszimmer',
+  //   label: 'Arbeitszimmer',
+  //   shutters: [
+  //     {
+  //       id: 'main',
+  //       label: '',
+  //       powerGpio: null,
+  //       directionGpio: null,
+  //       ...shutterConfig,
+  //     }
+  //   ],
+  //   windows: [
+  //     {
+  //       id: 'main',
+  //       label: 'Fenster'
+  //     }
+  //   ]
+  // },
   {
     id: 'schlafzimmer',
     label: 'Schlafzimmer',
     shutters: [
       {
-        id: 'main',
+        id: 'rolladen',
         label: '',
         powerGpio: 26,
         directionGpio: 20,
+        switchGpio: 16,
         ...shutterConfig,
+        triggerButtons: [
+          'shutter-switch'
+        ],
+        triggerWindows: [
+          'rolladen',
+        ],
+      }
+    ],
+    buttons: [
+      {
+        id: 'rolladen',
+        label: 'Rolladen Schalter',
+        gpio: 16,
       }
     ],
     windows: [
       {
-        id: 'main',
-        label: 'Fenster'
+        id: 'rolladen',
+        label: 'Fenster',
+        gpio: 19,
       }
     ]
   },
@@ -83,9 +100,9 @@ module.exports = [
         speedGpio: 27,
         minHumidityThreshold: 70,
         maxHumidityThreshold: 85,
-        minRunTime: 1,
-        lightTimeout: 3,
-        trailingTime: 2,
+        minRunTime: 120,
+        lightTimeout: 300,
+        trailingTime: 120,
         triggerLights: [
           'main'
         ],
@@ -110,8 +127,8 @@ module.exports = [
         speedGpio: 23,
         minHumidityThreshold: 70,
         maxHumidityThreshold: 85,
-        minRunTime: 60,
-        lightTimeout: 120,
+        minRunTime: 120,
+        lightTimeout: 300,
         trailingTime: 120,
         triggerLights: [
           'main'
