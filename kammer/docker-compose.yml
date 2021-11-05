@@ -20,7 +20,7 @@ services:
     build:
       context: ../../fan-control
       args:
-        - CACHE_DATE=2021-05-03
+        - CACHE_DATE=2021-11-06
     hostname: fan-control
     cap_add:
       - SYS_RAWIO
