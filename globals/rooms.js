@@ -10,21 +10,33 @@ module.exports = [
     label: 'Kinderzimmer',
     shutters: [
       {
-        id: 'main',
+        id: 'rolladen',
         label: 'Rolladen',
         powerGpio: 6,
         directionGpio: 12,
         ...shutterConfig,
+        triggerButtons: [
+          'rolladen'
+        ],
+        triggerWindows: [
+          'rolladen',
+        ],
       }
     ],
     windows: [
       {
-        id: 'main',
+        id: 'rolladen',
         label: 'Fenster',
-        affectsShutter: 'main',
-        // gpio: 21,
+        gpio: 22,
       }
-    ]
+    ],
+    buttons: [
+      {
+        id: 'rolladen',
+        label: 'Rolladen Schalter',
+        gpio: 23,
+      }
+    ],
   },
   // {
   //   id: 'arbeitszimmer',
@@ -51,17 +63,24 @@ module.exports = [
     shutters: [
       {
         id: 'rolladen',
-        label: '',
+        label: 'Rolladen',
         powerGpio: 26,
         directionGpio: 20,
         switchGpio: 16,
         ...shutterConfig,
         triggerButtons: [
-          'shutter-switch'
+          'rolladen'
         ],
         triggerWindows: [
           'rolladen',
         ],
+      }
+    ],
+    windows: [
+      {
+        id: 'rolladen',
+        label: 'Fenster',
+        gpio: 19,
       }
     ],
     buttons: [
@@ -71,13 +90,6 @@ module.exports = [
         gpio: 16,
       }
     ],
-    windows: [
-      {
-        id: 'rolladen',
-        label: 'Fenster',
-        gpio: 19,
-      }
-    ]
   },
   {
     id: 'bad',
