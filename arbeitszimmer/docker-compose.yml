@@ -46,7 +46,7 @@ services:
     build:
       context: ../../shutter-control
       args:
-        - CACHE_DATE=2021-11-07
+        - CACHE_DATE=2021-12-31
     hostname: shutter-control
     cap_add:
       - SYS_RAWIO
