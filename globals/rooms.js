@@ -26,41 +26,6 @@ module.exports = [
   //   ]
   // },
   {
-    id: 'wohnzimmer',
-    label: 'Wohnzimmer',
-    // shutters: [
-    //   {
-    //     id: 'main',
-    //     label: '',
-    //     powerGpio: null,
-    //     directionGpio: null,
-    //     ...shutterConfigBack,
-    //   }
-    // ],
-    windows: [
-      {
-        id: 'pflanzen',
-        label: 'Pflanzen',
-        shutterId: 'rolladen-pflanzen',
-      },
-      {
-        id: 'essbereich',
-        label: 'Essbereich',
-        shutterId: 'rolladen-essbereich',
-      },
-      {
-        id: 'front',
-        label: 'Front',
-        shutterId: 'rolladen-front',
-      },
-      {
-        id: 'balkon',
-        label: 'Balkon',
-        shutterId: 'rolladen-balkon',
-      }
-    ]
-  },
-  {
     id: 'kinderzimmer',
     label: 'Kinderzimmer',
     shutters: [
@@ -180,5 +145,40 @@ module.exports = [
         ],
       }
     ],
+  },
+  {
+    id: 'wohnzimmer',
+    label: 'Wohnzimmer',
+    // shutters: [
+    //   {
+    //     id: 'main',
+    //     label: '',
+    //     powerGpio: null,
+    //     directionGpio: null,
+    //     ...shutterConfigBack,
+    //   }
+    // ],
+    windows: [
+      {
+        id: 'pflanzen',
+        label: 'Pflanzen',
+        shutterId: 'rolladen-pflanzen',
+      },
+      {
+        id: 'essbereich',
+        label: 'Essbereich',
+        shutterId: 'rolladen-essbereich',
+      },
+      {
+        id: 'front',
+        label: 'Front',
+        shutterId: 'rolladen-front',
+      },
+      {
+        id: 'balkon',
+        label: 'Balkon',
+        shutterId: 'rolladen-balkon',
+      }
+    ]
   },
 ];

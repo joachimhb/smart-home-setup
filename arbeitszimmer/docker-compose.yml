@@ -46,7 +46,7 @@ services:
     build:
       context: ../../shutter-control
       args:
-        - CACHE_DATE=2021-12-31
+        - CACHE_DATE=2022-01-01-1
     hostname: shutter-control
     cap_add:
       - SYS_RAWIO
@@ -62,7 +62,7 @@ services:
     build:
       context: ../../smart-home
       args:
-        - CACHE_DATE=2021-11-07
+        - CACHE_DATE=2022-01-02
     hostname: smart-home
     ports:
       - 3000:3000
