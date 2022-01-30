@@ -5,6 +5,11 @@ const shutterConfigBack = {
   windowOpenValue: 80,
 };
 
+const shutterConfigFront = {
+  fullCloseMs: 19000,
+  windowOpenValue: 80,
+};
+
 module.exports = [
   // {
   //   id: 'arbeitszimmer',
@@ -158,6 +163,36 @@ module.exports = [
     //     ...shutterConfigBack,
     //   }
     // ],
+    shutters: [
+      {
+        id: 'rolladen-pflanzen',
+        label: 'R. Pflanzen',
+        powerGpio: 18,
+        directionGpio: 17,
+        ...shutterConfigFront,
+      },
+      {
+        id: 'rolladen-essbereich',
+        label: 'R. Essbereich',
+        powerGpio: 25,
+        directionGpio: 9,
+        ...shutterConfigFront,
+      },
+      {
+        id: 'rolladen-front',
+        label: 'R. Front',
+        powerGpio: 8,
+        directionGpio: 11,
+        ...shutterConfigFront,
+      },
+      {
+        id: 'rolladen-balkon',
+        label: 'R. Balkon',
+        powerGpio: 26,
+        directionGpio: 19,
+        ...shutterConfigFront,
+      }
+    ],
     windows: [
       {
         id: 'pflanzen',
