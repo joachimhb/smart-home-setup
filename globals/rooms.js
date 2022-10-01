@@ -64,9 +64,13 @@ module.exports = [
         powerGpio: 9,
         directionGpio: 25,
         ...shutterConfigBack,
-        triggerButtons: [
-          'rolladen-schalter'
-        ],
+      }
+    ],
+    windows: [
+      {
+        id: 'fenster',
+        label: 'Fenster',
+        shutterId: 'rolladen',
       }
     ],
   },
