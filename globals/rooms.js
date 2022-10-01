@@ -12,14 +12,14 @@ const shutterConfigFront = {
 
 // GPIOS USED
 // ARBEITSZIMMER
-6,
-12,
-22,
-23,
-26
-20,
-19,
-16
+// 6,
+// 12,
+// 22,
+// 23,
+// 26
+// 20,
+// 19,
+// 16
 
 module.exports = [
   {
