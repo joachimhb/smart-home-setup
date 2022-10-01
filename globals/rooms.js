@@ -10,29 +10,21 @@ const shutterConfigFront = {
   windowOpenValue: 80,
 };
 
+// GPIOS USED
+// ARBEITSZIMMER
+6,
+12,
+22,
+23,
+26
+20,
+19,
+16
+
 module.exports = [
-  // {
-  //   id: 'arbeitszimmer',
-  //   label: 'Arbeitszimmer',
-  //   shutters: [
-  //     {
-  //       id: 'main',
-  //       label: '',
-  //       powerGpio: null,
-  //       directionGpio: null,
-  //       ...shutterConfigBack,
-  //     }
-  //   ],
-  //   windows: [
-  //     {
-  //       id: 'main',
-  //       label: 'Fenster'
-  //     }
-  //   ]
-  // },
   {
     id: 'kinderzimmer',
-    label: 'Kinderzimmer',
+    label: 'Kinderz.',
     shutters: [
       {
         id: 'rolladen',
@@ -63,8 +55,24 @@ module.exports = [
     ],
   },
   {
+    id: 'arbeitszimmer',
+    label: 'Arbeitsz.',
+    shutters: [
+      {
+        id: 'rolladen',
+        label: 'Rolladen',
+        powerGpio: 9,
+        directionGpio: 25,
+        ...shutterConfigBack,
+        triggerButtons: [
+          'rolladen-schalter'
+        ],
+      }
+    ],
+  },
+  {
     id: 'schlafzimmer',
-    label: 'Schlafzimmer',
+    label: 'Schlafz.',
     shutters: [
       {
         id: 'rolladen',
