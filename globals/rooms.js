@@ -6,7 +6,7 @@ const shutterConfigBack = {
 };
 
 const shutterConfigFront = {
-  fullCloseMs: 19000,
+  fullCloseMs: 24000,
   windowOpenValue: 80,
 };
 
@@ -187,30 +187,31 @@ module.exports = [
       {
         id: 'rolladen-pflanzen',
         label: 'R. Pflanzen',
-        powerGpio: 18,
-        directionGpio: 17,
+        powerGpio: 14,
+        directionGpio: 4,
         ...shutterConfigFront,
       },
       {
         id: 'rolladen-essbereich',
         label: 'R. Essbereich',
-        powerGpio: 25,
-        directionGpio: 9,
+        powerGpio: 18,
+        directionGpio: 17,
         ...shutterConfigFront,
       },
       {
         id: 'rolladen-front',
         label: 'R. Front',
-        powerGpio: 8,
-        directionGpio: 11,
+        powerGpio: 23,
+        directionGpio: 22,
         ...shutterConfigFront,
       },
       {
         id: 'rolladen-balkon',
         label: 'R. Balkon',
-        powerGpio: 26,
-        directionGpio: 19,
+        powerGpio: 8,
+        directionGpio: 11,
         ...shutterConfigFront,
+        fullCloseMs: 32000,
       }
     ],
     windows: [
