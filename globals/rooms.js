@@ -77,6 +77,20 @@ module.exports = [
   {
     id: 'schlafzimmer',
     label: 'Schlafz.',
+    dht22: {
+      gpio: 15,
+    },
+    fans: [
+      {
+        id: 'lueftung',
+        label: 'Lüftung',
+        powerGpio: 14,
+        speedGpio: 2, // NOT USED
+        minHumidityThreshold: 65,
+        maxHumidityThreshold: 75,
+        minRunTime: 120,
+      }
+    ],
     shutters: [
       {
         id: 'rolladen',
@@ -166,15 +180,9 @@ module.exports = [
   {
     id: 'wohnzimmer',
     label: 'Wohnzimmer',
-    // shutters: [
-    //   {
-    //     id: 'main',
-    //     label: '',
-    //     powerGpio: null,
-    //     directionGpio: null,
-    //     ...shutterConfigBack,
-    //   }
-    // ],
+    dht22: {
+      gpio: 3,
+    },
     shutters: [
       {
         id: 'rolladen-pflanzen',

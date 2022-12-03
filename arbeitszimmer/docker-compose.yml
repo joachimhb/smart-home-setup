@@ -7,11 +7,19 @@ volumes:
       type: none
       device: /home/pirate/shared/smart-home-setup/arbeitszimmer/config/
       o: bind
+
   globals:
     driver: local
     driver_opts:
       type: none
       device: /home/pirate/shared/smart-home-setup/globals/
+      o: bind
+
+  smart-home-storage:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/pirate/data/smart-home-storage/
       o: bind
 
   mosquitto-data:
@@ -41,12 +49,28 @@ services:
       - mosquitto-log:/mosquitto/log
       - ./mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf:ro
 
+  fan-control:
+    restart: unless-stopped
+    build:
+      context: ../../fan-control
+      args:
+        - CACHE_DATE=2021-11-06
+    hostname: fan-control
+    cap_add:
+      - SYS_RAWIO
+    privileged: true
+    devices:
+      - /dev/mem:/dev/mem
+    volumes:
+      - config:/config:nocopy
+      - globals:/globals:nocopy
+
   shutter-control:
     restart: unless-stopped
     build:
       context: ../../shutter-control
       args:
-        - CACHE_DATE=2022-01-01-1
+        - CACHE_DATE=2022-11-20
     hostname: shutter-control
     cap_add:
       - SYS_RAWIO
@@ -62,7 +86,7 @@ services:
     build:
       context: ../../smart-home
       args:
-        - CACHE_DATE=2022-01-02-1
+        - CACHE_DATE=2022-11-21
     hostname: smart-home
     ports:
       - 3000:3000
@@ -73,6 +97,7 @@ services:
     devices:
       - /dev/mem:/dev/mem
     volumes:
+      - smart-home-storage:/storage
       - config:/config:nocopy
       - globals:/globals:nocopy
 
