@@ -86,7 +86,7 @@ services:
     build:
       context: ../../smart-home
       args:
-        - CACHE_DATE=2022-11-21
+        - CACHE_DATE=2022-12-03-2
     hostname: smart-home
     ports:
       - 3000:3000
