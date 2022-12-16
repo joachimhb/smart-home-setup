@@ -143,7 +143,7 @@ module.exports = [
         maxHumidityThreshold: 85,
         minRunTime: 120,
         lightTimeout: 300,
-        trailingTime: 120,
+        trailingTime: 60,
         triggerLights: [
           'main'
         ],
@@ -170,7 +170,7 @@ module.exports = [
         maxHumidityThreshold: 85,
         minRunTime: 120,
         lightTimeout: 300,
-        trailingTime: 120,
+        trailingTime: 60,
         triggerLights: [
           'main'
         ],
