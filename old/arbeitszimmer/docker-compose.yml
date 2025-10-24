@@ -1,11 +1,18 @@
 version: "3.2"
 
 volumes:
+  config:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/pirate/shared/smart-home-setup/arbeitszimmer/config/
+      o: bind
+
   globals:
     driver: local
     driver_opts:
       type: none
-      device: /home/pirate/shared/smart-home-setup/shared/
+      device: /home/pirate/shared/smart-home-setup/globals/
       o: bind
 
   smart-home-storage:
@@ -42,23 +49,37 @@ services:
       - mosquitto-log:/mosquitto/log
       - ./mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf:ro
 
-  room-control-raspi:
+  fan-control:
     restart: unless-stopped
     build:
-      context: ../../room-control-raspi
+      context: ../../fan-control
       args:
-        - CACHE_DATE=2025-10-24
-    hostname: room-control-raspi
+        - CACHE_DATE=2021-11-06
+    hostname: fan-control
     cap_add:
       - SYS_RAWIO
     privileged: true
     devices:
       - /dev/mem:/dev/mem
     volumes:
+      - config:/config:nocopy
       - globals:/globals:nocopy
-    environment:
-      - smart-home-config-path='../globals/config.js'
-      - smart-home-tasks='schlafzimmer:shutters,schlafzimmer:dh,kinderzimmer:shutters,arbeitszimmer:shutters'
+
+  shutter-control:
+    restart: unless-stopped
+    build:
+      context: ../../shutter-control
+      args:
+        - CACHE_DATE=2023-06-27
+    hostname: shutter-control
+    cap_add:
+      - SYS_RAWIO
+    privileged: true
+    devices:
+      - /dev/mem:/dev/mem
+    volumes:
+      - config:/config:nocopy
+      - globals:/globals:nocopy
 
   smart-home:
     restart: unless-stopped

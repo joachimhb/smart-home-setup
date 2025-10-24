@@ -32,20 +32,23 @@ module.exports = [
         powerGpio: 6,
         directionGpio: 12,
         ...shutterConfigBack,
+        triggerButtons: [
+          'rolladen-schalter'
+        ],
       }
     ],
     windows: [
       {
         id: 'fenster',
         label: 'Fenster',
-        shutterId: 'rolladen',
         gpio: 22,
+        shutterId: 'rolladen',
       }
     ],
     buttons: [
       {
-        id: 'rolladen-taster',
-        label: 'Rolladen Taster',
+        id: 'rolladen-schalter',
+        label: 'Rolladen Schalter',
         gpio: 23,
         interval: 100,
       }
@@ -74,20 +77,20 @@ module.exports = [
   {
     id: 'schlafzimmer',
     label: 'Schlafz.',
-    mainTemperature: {
-      type: 'dht22',
-      id: 'main'
+    dht22: {
+      gpio: 15,
     },
-    mainHumidity: {
-      type: 'dht22',
-      id: 'eck'
-    },
-    dht22: [
-      {
-        id: 'eck',
-        gpio: 15,
-      }
-    ],
+    // fans: [
+    //   {
+    //     id: 'lueftung',
+    //     label: 'Lüftung',
+    //     powerGpio: 14,
+    //     speedGpio: 2, // NOT USED
+    //     minHumidityThreshold: 65,
+    //     maxHumidityThreshold: 75,
+    //     minRunTime: 120,
+    //   }
+    // ],
     shutters: [
       {
         id: 'rolladen',
@@ -95,6 +98,9 @@ module.exports = [
         powerGpio: 26,
         directionGpio: 20,
         ...shutterConfigBack,
+        triggerButtons: [
+          'rolladen-schalter'
+        ],
       }
     ],
     windows: [
@@ -107,8 +113,8 @@ module.exports = [
     ],
     buttons: [
       {
-        id: 'rolladen-taster',
-        label: 'Rolladen Taster',
+        id: 'rolladen-schalter',
+        label: 'Rolladen Schalter',
         gpio: 16,
         interval: 100,
       }
@@ -117,12 +123,9 @@ module.exports = [
   {
     id: 'bad',
     label: 'Bad',
-    dht22: [
-      {
-        id: 'main',
-        gpio: 4,
-      }
-    ],
+    dht22: {
+      gpio: 4,
+    },
     lights: [
       {
         id: 'main',
@@ -141,6 +144,9 @@ module.exports = [
         minRunTime: 120,
         lightTimeout: 300,
         trailingTime: 60,
+        triggerLights: [
+          'main'
+        ],
       }
     ],
   },
@@ -165,26 +171,18 @@ module.exports = [
         minRunTime: 120,
         lightTimeout: 300,
         trailingTime: 60,
+        triggerLights: [
+          'main'
+        ],
       }
     ],
   },
   {
     id: 'wohnzimmer',
     label: 'Wohnzimmer',
-    mainTemperature: {
-      type: 'dht22',
-      id: 'main'
+    dht22: {
+      gpio: 3,
     },
-    mainHumidity: {
-      type: 'dht22',
-      id: 'main'
-    },
-    dht22: [
-      {
-        id: 'main',
-        gpio: 3,
-      }
-    ],
     shutters: [
       {
         id: 'rolladen-pflanzen',

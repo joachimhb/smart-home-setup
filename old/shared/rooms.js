@@ -38,7 +38,6 @@ module.exports = [
       {
         id: 'fenster',
         label: 'Fenster',
-        shutterId: 'rolladen',
         gpio: 22,
       }
     ],
@@ -67,21 +66,12 @@ module.exports = [
       {
         id: 'fenster',
         label: 'Fenster',
-        shutterId: 'rolladen',
       }
     ],
   },
   {
     id: 'schlafzimmer',
     label: 'Schlafz.',
-    mainTemperature: {
-      type: 'dht22',
-      id: 'main'
-    },
-    mainHumidity: {
-      type: 'dht22',
-      id: 'eck'
-    },
     dht22: [
       {
         id: 'eck',
@@ -102,7 +92,6 @@ module.exports = [
         id: 'fenster',
         label: 'Fenster',
         gpio: 19,
-        shutterId: 'rolladen',
       }
     ],
     buttons: [
@@ -171,14 +160,6 @@ module.exports = [
   {
     id: 'wohnzimmer',
     label: 'Wohnzimmer',
-    mainTemperature: {
-      type: 'dht22',
-      id: 'main'
-    },
-    mainHumidity: {
-      type: 'dht22',
-      id: 'main'
-    },
     dht22: [
       {
         id: 'main',
@@ -220,22 +201,18 @@ module.exports = [
       {
         id: 'pflanzen',
         label: 'Pflanzen',
-        shutterId: 'rolladen-pflanzen',
       },
       {
         id: 'essbereich',
         label: 'Essbereich',
-        shutterId: 'rolladen-essbereich',
       },
       {
         id: 'front',
         label: 'Front',
-        shutterId: 'rolladen-front',
       },
       {
         id: 'balkon',
         label: 'Balkon',
-        shutterId: 'rolladen-balkon',
       }
     ]
   },
