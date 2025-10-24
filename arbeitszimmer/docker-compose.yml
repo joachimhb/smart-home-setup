@@ -1,7 +1,21 @@
 version: "3.2"
 
 volumes:
+  config:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/pirate/shared/smart-home-setup/arbeitszimmer/config/
+      o: bind
+
   globals:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/pirate/shared/smart-home-setup/globals/
+      o: bind
+
+  shared:
     driver: local
     driver_opts:
       type: none
@@ -47,7 +61,7 @@ services:
     build:
       context: ../../room-control-raspi
       args:
-        - CACHE_DATE=2025-10-24
+        - CACHE_DATE=2025-10-24.7
     hostname: room-control-raspi
     cap_add:
       - SYS_RAWIO
@@ -55,10 +69,11 @@ services:
     devices:
       - /dev/mem:/dev/mem
     volumes:
-      - globals:/globals:nocopy
+      - shared:/globals:nocopy
     environment:
-      - smart-home-config-path='../globals/config.js'
-      - smart-home-tasks='schlafzimmer:shutters,schlafzimmer:dh,kinderzimmer:shutters,arbeitszimmer:shutters'
+      - SMART_HOME_RASPI=arbeitszimmer
+      - SMART_HOME_CONFIG_PATH=../globals/config.js
+      - SMART_HOME_TASKS=schlafzimmer:dht22,schlafzimmer:shutters,kinderzimmer:shutters,arbeitszimmer:shutters,schlafzimmer:windows,kinderzimmer:windows,arbeitszimmer:windows,schlafzimmer:buttons,kinderzimmer:buttons,arbeitszimmer:buttons
 
   smart-home:
     restart: unless-stopped
