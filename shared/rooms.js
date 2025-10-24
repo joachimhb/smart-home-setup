@@ -50,7 +50,7 @@ module.exports = [
         interval: 100,
         onClose: {
           action: 'shutterToggle',
-          actionParams: ['schlafzimmer', 'rolladen'],
+          actionParams: ['kinderzimmer', 'rolladen'],
         }
       }
     ],
