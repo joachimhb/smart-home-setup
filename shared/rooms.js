@@ -48,12 +48,27 @@ module.exports = [
         label: 'Rolladen Taster',
         gpio: 23,
         interval: 100,
+        onClose: {
+          action: 'shutterToggle',
+          actionParams: ['schlafzimmer', 'rolladen'],
+        }
       }
     ],
   },
   {
     id: 'arbeitszimmer',
     label: 'Arbeitsz.',
+    heating: {
+      schedule: {
+
+      },
+      trvs: [
+        {
+          id: 'main',
+          label: 'Main',
+        }
+      ],
+    },
     shutters: [
       {
         id: 'rolladen',
@@ -76,7 +91,7 @@ module.exports = [
     label: 'Schlafz.',
     mainTemperature: {
       type: 'dht22',
-      id: 'main'
+      id: 'eck'
     },
     mainHumidity: {
       type: 'dht22',
@@ -111,6 +126,10 @@ module.exports = [
         label: 'Rolladen Taster',
         gpio: 16,
         interval: 100,
+        onClose: {
+          action: 'shutterToggle',
+          actionParams: ['schlafzimmer', 'rolladen'],
+        }
       }
     ],
   },
