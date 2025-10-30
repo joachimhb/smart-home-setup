@@ -58,17 +58,17 @@ module.exports = [
   {
     id: 'arbeitszimmer',
     label: 'Arbeitsz.',
-    heating: {
-      schedule: {
+    // heating: {
+    //   schedule: {
 
-      },
-      trvs: [
-        {
-          id: 'main',
-          label: 'Main',
-        }
-      ],
-    },
+    //   },
+    //   trvs: [
+    //     {
+    //       id: 'main',
+    //       label: 'Main',
+    //     }
+    //   ],
+    // },
     shutters: [
       {
         id: 'rolladen',
@@ -204,6 +204,21 @@ module.exports = [
         gpio: 3,
       }
     ],
+    heating: {
+      schedule: {
+
+      },
+      trvs: [
+        {
+          id: 'front',
+          label: 'Front',
+        },
+        {
+          id: 'essen',
+          label: 'Essen',
+        }
+      ],
+    },
     shutters: [
       {
         id: 'rolladen-pflanzen',
