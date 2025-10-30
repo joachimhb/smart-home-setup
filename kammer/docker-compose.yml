@@ -15,18 +15,36 @@ volumes:
       o: bind
 
 services:
-  fan-control:
+  # fan-control:
+  #   restart: unless-stopped
+  #   build:
+  #     context: ../../fan-control
+  #     args:
+  #       - CACHE_DATE=2021-11-06
+  #   hostname: fan-control
+  #   cap_add:
+  #     - SYS_RAWIO
+  #   privileged: true
+  #   devices:
+  #     - /dev/mem:/dev/mem
+  #   volumes:
+  #     - config:/config:nocopy
+  #     - globals:/globals:nocopy
+  room-control-raspi:
     restart: unless-stopped
     build:
-      context: ../../fan-control
+      context: ../../room-control-raspi
       args:
-        - CACHE_DATE=2021-11-06
-    hostname: fan-control
+        - CACHE_DATE=2025-10-30
+    hostname: room-control-raspi
     cap_add:
       - SYS_RAWIO
     privileged: true
     devices:
       - /dev/mem:/dev/mem
     volumes:
-      - config:/config:nocopy
-      - globals:/globals:nocopy
+      - shared:/globals:nocopy
+    environment:
+      - SMART_HOME_RASPI=arbeitszimmer
+      - SMART_HOME_CONFIG_PATH=../globals/config.js
+      - SMART_HOME_TASKS=bad:dht22,bad:lights,bad:fans,bad:dht22,bad:lights,bad:fans,wc:dht22,wc:lights,wc:fans
