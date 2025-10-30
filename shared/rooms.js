@@ -136,6 +136,14 @@ module.exports = [
   {
     id: 'bad',
     label: 'Bad',
+    mainTemperature: {
+      type: 'dht22',
+      id: 'main'
+    },
+    mainHumidity: {
+      type: 'dht22',
+      id: 'main'
+    },
     dht22: [
       {
         id: 'main',
@@ -166,6 +174,14 @@ module.exports = [
   {
     id: 'wc',
     label: 'WC',
+    mainTemperature: {
+      type: 'dht22',
+      id: 'main'
+    },
+    mainHumidity: {
+      type: 'dht22',
+      id: 'main'
+    },
     lights: [
       {
         id: 'main',
