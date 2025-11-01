@@ -41,7 +41,7 @@ services:
     build:
       context: ../../room-control-raspi
       args:
-        - CACHE_DATE=2025-10-30
+        - CACHE_DATE=2025-11-02
     hostname: room-control-raspi
     cap_add:
       - SYS_RAWIO

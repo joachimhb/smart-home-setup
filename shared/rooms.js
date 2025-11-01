@@ -168,6 +168,9 @@ module.exports = [
         minRunTime: 120,
         lightTimeout: 300,
         trailingTime: 60,
+        triggerLights: [
+          'main'
+        ],
       }
     ],
   },
@@ -200,6 +203,9 @@ module.exports = [
         minRunTime: 120,
         lightTimeout: 300,
         trailingTime: 60,
+        // triggerLights: [
+        //   'main'
+        // ],
       }
     ],
   },
