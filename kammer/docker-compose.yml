@@ -51,7 +51,7 @@ services:
     volumes:
       - shared:/globals:nocopy
     environment:
-      - SMART_HOME_RASPI=arbeitszimmer
+      - SMART_HOME_RASPI=kammer
       - SMART_HOME_CONFIG_PATH=../globals/config.js
       - SMART_HOME_TASKS=bad:dht22,bad:lights,bad:fans,bad:dht22,bad:lights,bad:fans,wc:dht22,wc:lights,wc:fans
 

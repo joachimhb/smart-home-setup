@@ -1,0 +1,184 @@
+volumes:
+  teddycloud-certs:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/jogi/teddycloud/certs/
+      o: bind
+  teddycloud-config:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/jogi/teddycloud/config/
+      o: bind
+  teddycloud-content:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/jogi/teddycloud/content/
+      o: bind
+  teddycloud-library:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/jogi/teddycloud/library/
+      o: bind
+  teddycloud-custom_img:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/jogi/teddycloud/custom_img/
+      o: bind
+  teddycloud-firmware:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/jogi/teddycloud/firmware/
+      o: bin
+  teddycloud-cache:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/jogi/teddycloud/cache/
+      o: bind
+
+  paperless-db:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/jogi/paperless/db/
+      o: bind
+  paperless-redis:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/jogi/paperless/redis/
+      o: bind
+  paperless-data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/jogi/paperless/data/
+      o: bind
+  paperless-media:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/jogi/paperless/media/
+      o: bind
+  paperless-export:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/jogi/shared/paperless-export/
+      o: bind
+  paperless-incoming:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/jogi/shared/paperless-incoming/
+      o: bind
+
+  influxdb-data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/jogi/influx-db/data
+      o: bind
+  influxdb-config:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/jogi/influx-db/config
+      o: bind
+
+services:
+  teddycloud:
+    container_name: teddycloud
+    hostname: teddycloud
+    image: ghcr.io/toniebox-reverse-engineering/teddycloud:latest
+    ports:
+     - 80:80 #optional (for the webinterface)
+     - 8443:8443 #optional (for the webinterface)
+     - 443:443 #Port is needed for the connection for the box, must not be changed!
+    volumes:
+      - teddycloud-certs:/teddycloud/certs #certificates of the server
+      - teddycloud-config:/teddycloud/config #config file for the server and the boxes
+      - teddycloud-content:/teddycloud/data/content #microSD representation for the boxes
+      - teddycloud-library:/teddycloud/data/library #library to manage content
+      - teddycloud-custom_img:/teddycloud/data/www/custom_img #location to store custom images for custom tonies json
+      - teddycloud-firmware:/teddycloud/data/firmware #firmware backups
+      - teddycloud-cache:/teddycloud/data/cache #img cache for content images
+    restart: unless-stopped
+
+  paperless-broker:
+    image: docker.io/library/redis:7
+    restart: unless-stopped
+    volumes:
+      - paperless-redis:/data
+
+  paperless-db:
+    image: docker.io/library/mariadb:10
+    restart: unless-stopped
+    volumes:
+      - paperless-db:/var/lib/mysql
+    environment:
+      MARIADB_HOST: paperless
+      MARIADB_DATABASE: paperless
+      MARIADB_USER: paperless
+      MARIADB_PASSWORD: paperless
+      MARIADB_ROOT_PASSWORD: paperless
+
+  paperless-webserver:
+    image: ghcr.io/paperless-ngx/paperless-ngx:latest
+    restart: unless-stopped
+    depends_on:
+    - paperless-db
+    - paperless-broker
+    ports:
+    - "8000:8000"
+    volumes:
+    - paperless-data:/usr/src/paperless/data
+    - paperless-media:/usr/src/paperless/media
+    - paperless-export:/usr/src/paperless/export
+    - paperless-incoming:/usr/src/paperless/consume
+    env_file: docker-compose.env
+    environment:
+      PAPERLESS_REDIS: redis://paperless-broker:6379
+      PAPERLESS_DBENGINE: mariadb
+      PAPERLESS_DBHOST: paperless-db
+      PAPERLESS_DBUSER: paperless
+      PAPERLESS_DBPASS: paperless
+      PAPERLESS_DBPORT: 3306
+
+  influxdb:
+    image: influxdb:2.7
+    container_name: influxdb
+    ports:
+      - "8086:8086"
+    volumes:
+      - influxdb-data:/var/lib/influxdb2
+      - influxdb-config:/etc/influxdb2
+    environment:
+      - DOCKER_INFLUXDB_INIT_MODE=setup
+      - DOCKER_INFLUXDB_INIT_USERNAME=admin
+      - DOCKER_INFLUXDB_INIT_PASSWORD=influxdb-jhb-1337
+      - DOCKER_INFLUXDB_INIT_ORG=jhb
+      - DOCKER_INFLUXDB_INIT_BUCKET=smarthome
+      - DOCKER_INFLUXDB_INIT_RETENTION=90d     # Daten nur 3 Monate behalten
+      - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=influxdb-jhb-1337-token
+    restart: unless-stopped
+
+  smart-home-v2:
+    restart: unless-stopped
+    build:
+      context: ../../smart-home
+      args:
+        - CACHE_DATE=2025-11-01
+    hostname: smart-home
+    ports:
+      - 3000:3000
+      - 3001:3001
+    volumes:
+      - config:/config:nocopy
+      - globals:/globals:nocopy
