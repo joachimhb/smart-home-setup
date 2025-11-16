@@ -58,17 +58,6 @@ module.exports = [
   {
     id: 'arbeitszimmer',
     label: 'Arbeitsz.',
-    // heating: {
-    //   schedule: {
-
-    //   },
-    //   trvs: [
-    //     {
-    //       id: 'main',
-    //       label: 'Main',
-    //     }
-    //   ],
-    // },
     shutters: [
       {
         id: 'rolladen',
@@ -89,17 +78,11 @@ module.exports = [
   {
     id: 'schlafzimmer',
     label: 'Schlafz.',
-    mainTemperature: {
-      type: 'dht22',
-      id: 'eck'
-    },
-    mainHumidity: {
-      type: 'dht22',
-      id: 'eck'
-    },
+    mainTemperature: 'dht22-eck',
+    mainHumidity: 'dht22-eck',
     dht22: [
       {
-        id: 'eck',
+        id: 'dht22-eck',
         gpio: 15,
       }
     ],
@@ -136,17 +119,11 @@ module.exports = [
   {
     id: 'bad',
     label: 'Bad',
-    mainTemperature: {
-      type: 'dht22',
-      id: 'main'
-    },
-    mainHumidity: {
-      type: 'dht22',
-      id: 'main'
-    },
+    mainTemperature: 'dht22-main',
+    mainHumidity: 'dht22-main',
     dht22: [
       {
-        id: 'main',
+        id: 'dht22-main',
         gpio: 4,
       }
     ],
@@ -177,14 +154,8 @@ module.exports = [
   {
     id: 'wc',
     label: 'WC',
-    mainTemperature: {
-      type: 'dht22',
-      id: 'main'
-    },
-    mainHumidity: {
-      type: 'dht22',
-      id: 'main'
-    },
+    mainTemperature: 'dht22-main',
+    mainHumidity: 'dht22-main',
     lights: [
       {
         id: 'main',
@@ -212,18 +183,24 @@ module.exports = [
   {
     id: 'wohnzimmer',
     label: 'Wohnzimmer',
-    mainTemperature: {
-      type: 'dht22',
-      id: 'main'
-    },
-    mainHumidity: {
-      type: 'dht22',
-      id: 'main'
-    },
+    mainTemperature: 'dht22-main',
+    mainHumidity: 'dht22-main',
     dht22: [
       {
-        id: 'main',
+        id: 'dht22-main',
         gpio: 3,
+      }
+    ],
+    zigbee: [
+      {
+        type: 'roomthermostat',
+        manufacturer: 'tuya',
+        id: 'wandthermostat-eingang',
+      },
+      {
+        type: 'heatingthermostat',
+        manufacturer: 'sonoff',
+        id: 'front',
       }
     ],
     heating: {

@@ -72,3 +72,11 @@ sudo service smbd restart
     "dns": ["10.0.0.2", "8.8.8.8"]
 }
 ```
+
+### nfs
+
+```sh
+sudo apt install net-tools
+sudo apt update
+sudo apt install nfs-kernel-server
+```
