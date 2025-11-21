@@ -188,7 +188,7 @@ module.exports = [
     dht22: [
       {
         id: 'dht22-main',
-        gpio: 3,
+        gpio: 24,
       }
     ],
     zigbee: [
