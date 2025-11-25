@@ -63,6 +63,30 @@ sudo service smbd restart
 
 ### docker
 
+#### install
+
+```shell
+# Add Docker's official GPG key:
+sudo apt update
+sudo apt install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+# Add the repository to Apt sources:
+sudo tee /etc/apt/sources.list.d/docker.sources <<EOF
+Types: deb
+URIs: https://download.docker.com/linux/debian
+Suites: $(. /etc/os-release && echo "$VERSION_CODENAME")
+Components: stable
+Signed-By: /etc/apt/keyrings/docker.asc
+EOF
+
+sudo apt update
+
+sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+```
+
 #### dns
 
 /etc/docker/daemon.json
@@ -79,4 +103,24 @@ sudo service smbd restart
 sudo apt install net-tools
 sudo apt update
 sudo apt install nfs-kernel-server
+```
+
+### nobara
+
+/etc/fstab
+
+```shell
+UUID=509e3e9b-c509-4a5c-8560-8b90b58752ef /boot          ext4    defaults   0 2
+UUID=e70f8f25-37af-469c-bfc0-fef50800d979 /              btrfs   subvol=/@,compress=zstd:1,x-systemd.device-timeout=0 0 0
+
+/mnt/local_data/home /home none bind 0 0
+UUID=c167cca7-7d2a-47a0-938d-0bde860069fc swap           swap    defaults   0 0
+tmpfs                                     /tmp           tmpfs   defaults,noatime,mode=1777 0 0
+UUID=54495efe-498d-4a85-ae73-f51511bd16c7 /mnt/local_data ext4   defaults 0 0
+
+# old
+#UUID=e70f8f25-37af-469c-bfc0-fef50800d979 /home2          btrfs   subvol=/@home,compress=zstd:1,x-systemd.device-timeout=0 0 0
+#UUID=e70f8f25-37af-469c-bfc0-fef50800d979 /home          btrfs   subvol=/@home,compress=zstd:1,x-systemd.device-timeout=0 0 0
+
+
 ```
